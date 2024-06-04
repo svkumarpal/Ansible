@@ -1,1 +1,64 @@
 ---
+- name: Pre and Post System Checks
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Pre-checks
+      block:
+        - name: Check if required packages are installed
+          ansible.builtin.package:
+            name: "{{ item }}"
+            state: present
+          loop:
+            - package1
+            - package2
+            - package3
+
+        - name: Check if specific directories exist
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: directory
+          loop:
+            - /path/to/directory1
+            - /path/to/directory2
+
+        # Add more pre-check tasks as needed
+
+      rescue:
+        - name: Handle errors during pre-checks
+          debug:
+            msg: "Error occurred during pre-checks: {{ ansible_failed_result }}"
+
+    - name: Perform System Changes
+      block:
+        # Tasks to perform system changes (installation, configuration, etc.)
+
+      rescue:
+        - name: Handle errors during system changes
+          debug:
+            msg: "Error occurred during system changes: {{ ansible_failed_result }}"
+    
+    - name: Post-checks
+      block:
+        - name: Check if services are running
+          ansible.builtin.service:
+            name: "{{ item }}"
+            state: started
+          loop:
+            - service1
+            - service2
+            - service3
+
+        - name: Verify specific files exist
+          ansible.builtin.stat:
+            path: "{{ item }}"
+          loop:
+            - /path/to/file1
+            - /path/to/file2
+
+        # Add more post-check tasks as needed
+
+      rescue:
+        - name: Handle errors during post-checks
+          debug:
+            msg: "Error occurred during post-checks: {{ ansible_failed_result }}"
