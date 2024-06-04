@@ -1,6 +1,9 @@
 <p> Ansible Playbooks </p>
 <br> Author: VINOD KUMAR PAL
 <br> Contact: svkumarpal@gmail.com
+
+
+
 This playbook is divided into three main sections:
 
 Pre-checks: This section performs checks before any changes are made to the system. It verifies if required packages are installed and if specific directories exist. If any error occurs during pre-checks, it's handled in the rescue section.
