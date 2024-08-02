@@ -1,5 +1,5 @@
 - name: Play 1 - Modify /etc/default/grub to configure kernel boot parameters.
-  hosts: local
+  hosts: all
 
   tasks:
     - name: Append GRUB_CMDLINE_LINUX_DEFAULT variable to /etc/default/grub
