@@ -1,0 +1,19 @@
+- name: Play 1 - Modify /etc/default/grub to configure kernel boot parameters.
+  hosts: local
+
+  tasks:
+    - name: Append GRUB_CMDLINE_LINUX_DEFAULT variable to /etc/default/grub
+      lineinfile:
+        path: /etc/default/grub
+        insertafter: EOF
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=0 quiet splash"'
+
+    - name: Append GRUB_CMDLINE_LINUX variable to /etc/default/grub
+      lineinfile:
+        path: /etc/default/grub
+        insertafter: EOF
+        line: 'GRUB_CMDLINE_LINUX="ipv6.disable=0"'
+
+    - name: Run grub2-mkconfig to update /boot/grub/grub.cfg
+      command:
+        cmd: grub2-mkconfig 
